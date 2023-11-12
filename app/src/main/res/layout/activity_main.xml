@@ -26,13 +26,13 @@
         android:padding="8dp"
         android:layout_margin="20dp"
         android:background="#CCCCCC">
-
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="5dp"
             android:background="#FFFFFF">
             <ImageView
                 android:layout_width="48dp"
@@ -40,15 +40,72 @@
                 android:src=""
                 android:scaleType="centerInside"/>
         </FrameLayout>
-
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="5dp"
+            android:background="#FFFFFF">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src=""
+                android:scaleType="centerInside"/>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="5dp"
+            android:background="#FFFFFF">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src=""
+                android:scaleType="centerInside"/>
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:gravity="left"
+        android:padding="8dp"
+        android:layout_margin="20dp"
+        android:background="#CCCCCC">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="5dp"
+            android:background="#FFFFFF">
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="5dp"
+            android:background="#FFFFFF">
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="5dp"
+            android:background="#FFFFFF">
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>
