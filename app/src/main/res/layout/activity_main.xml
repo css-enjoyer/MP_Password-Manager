@@ -140,7 +140,7 @@
 
     <LinearLayout
         android:id="@+id/menuItems"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_marginEnd="16dp"
@@ -150,17 +150,21 @@
         <!-- Folder and Password Options go here -->
         <TextView
             android:id="@+id/menuFolder"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:onClick="onFolderClick"
-            android:text="Folder" />
+            android:text="Folder"
+            android:textAlignment="center"
+            android:textStyle="bold" />
         <!-- Password Option -->
         <TextView
             android:id="@+id/menuPassword"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:onClick="onPasswordClick"
-            android:text="Password" />
+            android:text="Password"
+            android:textAlignment="center"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
