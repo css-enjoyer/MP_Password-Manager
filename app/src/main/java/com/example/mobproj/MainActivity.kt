@@ -17,9 +17,8 @@ class MainActivity : AppCompatActivity() {
 
         fabAdd = findViewById(R.id.fabAdd)
         menuItems = findViewById(R.id.menuItems)
-
+// Handle Add Click
         fabAdd.setOnClickListener {
-            // Toggle visibility of menu items
             menuItems.visibility = if (menuItems.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
     }
@@ -27,13 +26,11 @@ class MainActivity : AppCompatActivity() {
     // Handle Folder Click
     fun onFolderClick(view: View) {
         Toast.makeText(this, "Folder selected", Toast.LENGTH_SHORT).show()
-        // Add your logic for handling the folder click
     }
 
     // Handle Password Click
     fun onPasswordClick(view: View) {
         Toast.makeText(this, "Password selected", Toast.LENGTH_SHORT).show()
-        // Add your logic for handling the password click
     }
 }
 
