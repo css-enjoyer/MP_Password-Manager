@@ -1,87 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="16dp"
-    tools:context=".MainActivity">
+    android:padding="30dp">
 
     <TextView
+        android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:text="Password Manager"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"/>
+        app:layout_constraintBottom_toTopOf="@id/fabAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028" />
 
     <LinearLayout
+        android:id="@+id/foldersLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="#CCCCCC"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:gravity="left"
         android:padding="8dp"
-        android:layout_margin="20dp"
-        android:background="#CCCCCC">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView">
+        <!-- FrameLayouts with ImageViews go here -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#FFFFFF"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_margin="5dp"
-            android:background="#FFFFFF">
+            android:foreground="?android:attr/selectableItemBackground">
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src=""
-                android:scaleType="centerInside"/>
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerInside"
+                android:src="" />
         </FrameLayout>
+
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#FFFFFF"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_margin="5dp"
-            android:background="#FFFFFF">
+            android:foreground="?android:attr/selectableItemBackground">
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src=""
-                android:scaleType="centerInside"/>
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerInside"
+                android:src="" />
         </FrameLayout>
+
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#FFFFFF"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_margin="5dp"
-            android:background="#FFFFFF">
+            android:foreground="?android:attr/selectableItemBackground">
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src=""
-                android:scaleType="centerInside"/>
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerInside"
+                android:src="" />
         </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/passwordsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="44dp"
+        android:background="#CCCCCC"
         android:gravity="left"
+        android:orientation="vertical"
         android:padding="8dp"
-        android:layout_margin="20dp"
-        android:background="#CCCCCC">
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foldersLayout">
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="40dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -90,7 +104,7 @@
         </FrameLayout>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="40dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -99,7 +113,7 @@
         </FrameLayout>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="40dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -108,4 +122,45 @@
         </FrameLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <!-- Menu Items (Hidden) -->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="80dp"
+        app:backgroundTint="#FFFFFF"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <LinearLayout
+        android:id="@+id/menuItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/fabAdd"
+        app:layout_constraintEnd_toEndOf="parent">
+        <!-- Folder and Password Options go here -->
+        <TextView
+            android:id="@+id/menuFolder"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:onClick="onFolderClick"
+            android:text="Folder" />
+        <!-- Password Option -->
+        <TextView
+            android:id="@+id/menuPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:onClick="onPasswordClick"
+            android:text="Password" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
