@@ -34,46 +34,51 @@
         android:layout_marginTop="40dp"
         android:background="#1C1C27"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="8dp"
+        android:orientation="vertical"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTextView">
         <TextView
             android:id="@+id/folderLegend"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Folders"
-            android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="#F2F4F3"
-            android:textSize="10sp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            android:layout_marginBottom="10dp"
             android:typeface="normal" />
-        <androidx.cardview.widget.CardView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
-            android:background="#E3E3E3"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardCornerRadius="8dp"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+        <LinearLayout
+            android:id="@+id/foldersRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#1C1C27"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardCornerRadius="8dp"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
-            android:background="#1C1C27"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardCornerRadius="8dp"/>
+            android:gravity="center"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="#E3E3E3"
+                app:cardCornerRadius="8dp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="#E3E3E3"
+                app:cardCornerRadius="8dp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="#E3E3E3"
+                app:cardCornerRadius="8dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <!--  Password Containers  -->
@@ -85,44 +90,41 @@
         android:background="#1C1C27"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/foldersLayout">
         <TextView
             android:id="@+id/pwLegend"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Passwords"
-            android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="#F2F4F3"
-            android:textSize="10sp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            android:layout_marginBottom="10dp"
             android:typeface="normal" />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="#E3E3E3"
-            android:clickable="true"
-            android:focusable="true"
             app:cardCornerRadius="8dp"/>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="#E3E3E3"
-            android:clickable="true"
-            android:focusable="true"
             app:cardCornerRadius="8dp"/>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="#E3E3E3"
-            android:clickable="true"
-            android:focusable="true"
             app:cardCornerRadius="8dp"/>
     </LinearLayout>
 
