@@ -1,5 +1,6 @@
 package com.example.mobproj
 
+import DBHandler
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
@@ -10,7 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var fabAdd: FloatingActionButton
@@ -23,20 +26,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var instructionText: TextView
     private var pinAttempts = 0
 
+    // For database
+    private var dbHandler: DBHandler? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize lockscreen
         initPinDialog()
         showPinDialog()
 
+        // Initialize add button
         fabAdd = findViewById(R.id.fabAdd)
         menuItems = findViewById(R.id.menuItems)
-
-        // Handle Add Button Click
         fabAdd.setOnClickListener {
             menuItems.visibility = if (menuItems.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
+
+        // Initialize database
+        dbHandler = DBHandler(this)
     }
 
     private fun initPinDialog() {
@@ -81,6 +91,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     // Handle Folder Button Click
     fun onFolderClick(view: View) {
         // Inflate the Folder_Creation_Layout
@@ -110,7 +122,6 @@ class MainActivity : AppCompatActivity() {
         }
         folderCreationDialog.show()
     }
-
     // Handle Password Button Click
     fun onPasswordClick(view: View) {
         // Inflate Password_Creation_Layout
@@ -127,11 +138,26 @@ class MainActivity : AppCompatActivity() {
             .setView(passwordCreationView)
             .create()
 
-        // Pass inputs to database on save
+        // listener on password save
         btnSave.setOnClickListener {
-            val title = passwordTitle.text.toString()
-            val pw = passwordInput.text.toString()
-            val description = passwordDescription.text.toString()
+            val pwTitle = passwordTitle.text.toString()
+            val pwDesc = passwordDescription.text.toString()
+            val password = passwordInput.text.toString()
+
+            // validate text fields
+            if (pwTitle.isEmpty() && password.isEmpty() && pwDesc.isEmpty()) {
+                Toast.makeText(this@MainActivity, "Enter all required info.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            // call method to pass values to db
+            dbHandler?.addPassword(pwTitle, pwDesc, password)
+
+            // After adding the data, we are displaying a toast message.
+            Toast.makeText(this@MainActivity, "Course has been added.", Toast.LENGTH_SHORT).show()
+            passwordTitle.setText("")
+            passwordDescription.setText("")
+            passwordInput.setText("")
+
             passwordCreationDialog.dismiss()
         }
         btnCancel.setOnClickListener {
