@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     // For database
     private var dbHandler: DBHandler? = null
 
+    // For recycler
+    private lateinit var passwordRecyclerView: RecyclerView
+    private lateinit var passwordAdapter: PasswordAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +40,6 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize lockscreen
         initPinDialog()
-        showPinDialog()
 
         // Initialize add button
         fabAdd = findViewById(R.id.fabAdd)
@@ -48,6 +50,14 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize database
         dbHandler = DBHandler(this)
+
+        // Initialize recycler and adapter
+        passwordRecyclerView = findViewById(R.id.passwordRecyclerView)
+        val passwordList = dbHandler?.getPassword() ?: emptyList()
+
+        passwordAdapter = PasswordAdapter(passwordList)
+        passwordRecyclerView.adapter = passwordAdapter
+        passwordRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun initPinDialog() {
@@ -61,51 +71,35 @@ class MainActivity : AppCompatActivity() {
 
         // Set click listener for the confirm button
         confirmButton.setOnClickListener {
-            // Check the entered PIN
-            checkPin(pinInput.text.toString())
-        }
-    }
-    private fun showPinDialog() {
-        // Show the PIN dialog
-        pinDialog.show()
-    }
-    private fun checkPin(enteredPin: String) {
-        // Default PIN
-        val defaultPin = "0000"
+            val defaultPin = "0000"
+            val enteredPin = pinInput.text.toString()
 
-        // Check if the entered PIN is correct
-        if (enteredPin == defaultPin) {
-            pinDialog.dismiss()
-        } else {
-            // Incorrect PIN, increment attempts
-            pinAttempts++
-            // Clear PIN input
-            pinInput.text.clear()
-            // Update instruction text
-            instructionText.text = "Incorrect PIN. Attempts: $pinAttempts"
-            // Add logic for handling incorrect PIN attempts (e.g., show a message after a certain number of attempts)
-            if (pinAttempts >= 3) {
-                Toast.makeText(this, "Three attempts reached.", Toast.LENGTH_SHORT).show()
-                pinAttempts = 0
+            if (enteredPin == defaultPin) {
+                pinDialog.dismiss()
+            } else {
+                pinAttempts++
+                pinInput.text.clear()
+                instructionText.text = "Incorrect PIN. Attempts: $pinAttempts"
+                // add logic for handling incorrect PIN attempts (e.g., show a message after a certain number of attempts)
+                if (pinAttempts >= 3) {
+                    Toast.makeText(this, "Three attempts reached.", Toast.LENGTH_SHORT).show()
+                    pinAttempts = 0
 
+                }
             }
         }
+        pinDialog.show()
     }
-
-
-
     // Handle Folder Button Click
     fun onFolderClick(view: View) {
         // Inflate the Folder_Creation_Layout
         val folderCreationView = layoutInflater.inflate(R.layout.folder_creation_layout, null)
-
         // Initialize UI components
         val folderTitle: EditText = folderCreationView.findViewById(R.id.folderTitle)
         val folderDescription: EditText = folderCreationView.findViewById(R.id.folderDescription)
         val folderColor: EditText = folderCreationView.findViewById(R.id.folderColor)
         val btnSave: Button = folderCreationView.findViewById(R.id.btnSave)
         val btnCancel: Button = folderCreationView.findViewById(R.id.btnCancel)
-
         // Create AlertDialog
         val folderCreationDialog = AlertDialog.Builder(this)
             .setView(folderCreationView)
@@ -123,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
         folderCreationDialog.show()
     }
-    // Handle com.example.mobproj.Password Button Click
+    // Handle Password Button Click
     fun onPasswordClick(view: View) {
         // Inflate Password_Creation_Layout
         val passwordCreationView = layoutInflater.inflate(R.layout.password_creation_layout, null)
@@ -156,7 +150,6 @@ class MainActivity : AppCompatActivity() {
             val success = dbHandler?.addPassword(passwordObject)
             if (success != null && success) {
                 Log.d("DBHandler", "Inserted Password with ID: " + passwordObject.pwID)
-                dbHandler?.getPassword()
                 Toast.makeText(this@MainActivity, "Password has been added.", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this@MainActivity, "Failed to add password.", Toast.LENGTH_SHORT).show()
