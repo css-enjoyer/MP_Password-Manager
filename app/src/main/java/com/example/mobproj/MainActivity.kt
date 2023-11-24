@@ -1,8 +1,8 @@
 package com.example.mobproj
 
-import DBHandler
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -122,7 +123,7 @@ class MainActivity : AppCompatActivity() {
         }
         folderCreationDialog.show()
     }
-    // Handle Password Button Click
+    // Handle com.example.mobproj.Password Button Click
     fun onPasswordClick(view: View) {
         // Inflate Password_Creation_Layout
         val passwordCreationView = layoutInflater.inflate(R.layout.password_creation_layout, null)
@@ -149,11 +150,19 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Enter all required info.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // call method to pass values to db
-            dbHandler?.addPassword(pwTitle, pwDesc, password)
 
-            // After adding the data, we are displaying a toast message.
-            Toast.makeText(this@MainActivity, "Course has been added.", Toast.LENGTH_SHORT).show()
+            // create Password object with the entered values
+            val passwordObject = Password(0, pwTitle, pwDesc, password)
+            val success = dbHandler?.addPassword(passwordObject)
+            if (success != null && success) {
+                Log.d("DBHandler", "Inserted Password with ID: " + passwordObject.pwID)
+                dbHandler?.getPassword()
+                Toast.makeText(this@MainActivity, "Password has been added.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@MainActivity, "Failed to add password.", Toast.LENGTH_SHORT).show()
+            }
+
+            // clear fields
             passwordTitle.setText("")
             passwordDescription.setText("")
             passwordInput.setText("")
