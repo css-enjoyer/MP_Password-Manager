@@ -55,7 +55,9 @@ class MainActivity : AppCompatActivity() {
         passwordRecyclerView = findViewById(R.id.passwordRecyclerView)
         val passwordList = dbHandler?.getPassword() ?: emptyList()
 
-        passwordAdapter = PasswordAdapter(passwordList)
+        passwordAdapter = PasswordAdapter(passwordList,
+                                          editClickListener = {position -> onPasswordEditClick(position) },
+                                          deleteClickListener = {position -> onPasswordDeleteClick(position)})
         passwordRecyclerView.adapter = passwordAdapter
         passwordRecyclerView.layoutManager = LinearLayoutManager(this)
     }
@@ -149,6 +151,7 @@ class MainActivity : AppCompatActivity() {
             val passwordObject = Password(0, pwTitle, pwDesc, password)
             val success = dbHandler?.addPassword(passwordObject)
             if (success != null && success) {
+                passwordAdapter.notifyDataSetChanged()
                 Log.d("DBHandler", "Inserted Password with ID: " + passwordObject.pwID)
                 Toast.makeText(this@MainActivity, "Password has been added.", Toast.LENGTH_SHORT).show()
             } else {
@@ -166,6 +169,58 @@ class MainActivity : AppCompatActivity() {
             passwordCreationDialog.dismiss()
         }
         passwordCreationDialog.show()
+    }
+    fun onPasswordEditClick(position: Int) {
+        // inflate password_creation_layout
+        val passwordEditView = layoutInflater.inflate(R.layout.password_creation_layout, null)
+        // initialize components
+        val passwordTitle: EditText = passwordEditView.findViewById(R.id.passwordTitle)
+        val passwordInput: EditText = passwordEditView.findViewById(R.id.passwordInput)
+        val passwordDescription: EditText = passwordEditView.findViewById(R.id.passwordDescription)
+        val btnSave: Button = passwordEditView.findViewById(R.id.btnSave)
+        val btnCancel: Button = passwordEditView.findViewById(R.id.btnCancel)
+        // create dialog
+        val editPasswordDialog = AlertDialog.Builder(this)
+            .setView(passwordEditView)
+            .create()
+        // listener on password update
+        btnSave.setOnClickListener {
+            // retrieve inputs
+            val newPasswordTitle = passwordTitle.text.toString()
+            val newPasswordDescription = passwordDescription.text.toString()
+            val newPasswordInput = passwordInput.text.toString()
+            // update the corresponding Password object in the database
+            val selectedPassword = passwordAdapter.getItemAtPosition(position)
+            val updatedPasswordObject = Password(selectedPassword.pwID, newPasswordTitle, newPasswordInput, newPasswordDescription)
+            val updateSuccess = dbHandler?.updatePassword(updatedPasswordObject)
+
+            if (updateSuccess != null && updateSuccess > 0) {
+                // update adapter
+                val updatedList = dbHandler?.getPassword() ?: emptyList()
+                passwordAdapter.updateData(updatedList)
+                // notify the adapter that data changed
+                passwordAdapter.notifyDataSetChanged()
+                editPasswordDialog.dismiss()
+                Toast.makeText(this@MainActivity, "Password updated successfully.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@MainActivity, "Failed to update password.", Toast.LENGTH_SHORT).show()
+            }
+            // clear fields
+            passwordTitle.setText("")
+            passwordDescription.setText("")
+            passwordInput.setText("")
+            editPasswordDialog.dismiss()
+        }
+
+        btnCancel.setOnClickListener {
+            editPasswordDialog.dismiss()
+        }
+        editPasswordDialog.show()
+    }
+
+    fun onPasswordDeleteClick(position: Int) {
+        // Handle the "Edit" button click for the item at the given position
+        // You can open an edit dialog or perform any other edit action here
     }
 }
 

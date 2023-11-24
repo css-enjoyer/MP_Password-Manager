@@ -3,16 +3,22 @@ package com.example.mobproj
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PasswordAdapter(private val passwordList: List<Password>) : RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
+class PasswordAdapter(private var passwordList: List<Password>,
+                      private val editClickListener: (Int) -> Unit,
+                      private val deleteClickListener: (Int) -> Unit) : RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
 
     // represents a single item/view in recycler view
     class PasswordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // retrieve textviews in password_layout
+        // retrieve ui in password_layout
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val descTextView: TextView = itemView.findViewById(R.id.descTextView)
+        val passwordTextView: TextView = itemView.findViewById(R.id.passwordTextView)
+        val editPasswordButton: Button = itemView.findViewById(R.id.editPasswordBtn)
+        val delPasswordButton: Button = itemView.findViewById(R.id.delPasswordBtn)
     }
     // creates new viewholders
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PasswordViewHolder {
@@ -25,8 +31,18 @@ class PasswordAdapter(private val passwordList: List<Password>) : RecyclerView.A
         val password = passwordList[position]
         holder.titleTextView.text = password.pwTitle
         holder.descTextView.text = password.pwDesc
-    }
+        holder.passwordTextView.text = password.password
 
+        holder.editPasswordButton.setOnClickListener { editClickListener(position) }
+        holder.delPasswordButton.setOnClickListener { deleteClickListener(position) }
+    }
+    fun getItemAtPosition(position: Int): Password {
+        return passwordList[position]
+    }
+    fun updateData(newData: List<Password>) {
+        passwordList = newData
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int {
         return passwordList.size
     }
