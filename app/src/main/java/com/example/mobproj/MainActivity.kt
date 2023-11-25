@@ -151,6 +151,10 @@ class MainActivity : AppCompatActivity() {
             val passwordObject = Password(0, pwTitle, pwDesc, password)
             val success = dbHandler?.addPassword(passwordObject)
             if (success != null && success) {
+                // update adapter
+                val updatedList = dbHandler?.getPassword() ?: emptyList()
+                passwordAdapter.updateData(updatedList)
+                // notify the adapter that data changed
                 passwordAdapter.notifyDataSetChanged()
                 Log.d("DBHandler", "Inserted Password with ID: " + passwordObject.pwID)
                 Toast.makeText(this@MainActivity, "Password has been added.", Toast.LENGTH_SHORT).show()
