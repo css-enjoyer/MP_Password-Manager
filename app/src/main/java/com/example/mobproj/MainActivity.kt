@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
+            dbHandler?.getPassword()
         }
         pinDialog.show()
     }

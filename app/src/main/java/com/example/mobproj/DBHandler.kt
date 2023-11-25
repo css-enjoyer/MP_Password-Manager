@@ -86,12 +86,11 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_
     fun updatePassword(pw: Password): Int {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(COL_ID, pw.pwID)
         contentValues.put(COL_TITLE, pw.pwTitle)
         contentValues.put(COL_DESC, pw.pwDesc)
         contentValues.put(COL_PW, pw.password)
 
-        val success = db.update(TABLE_PASSWORDS, contentValues, "id=" + pw.pwID, null)
+        val success = db.update(TABLE_PASSWORDS, contentValues, "$COL_ID=?", arrayOf(pw.pwID.toString()))
         db.close()
         return success
     }
