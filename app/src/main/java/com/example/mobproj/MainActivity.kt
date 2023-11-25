@@ -17,19 +17,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MainActivity : AppCompatActivity() {
+    // For add button
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var menuItems: LinearLayout
-
     // For initial lockscreen
     private lateinit var pinDialog: Dialog
     private lateinit var pinInput: EditText
     private lateinit var confirmButton: Button
     private lateinit var instructionText: TextView
     private var pinAttempts = 0
-
     // For database
     private var dbHandler: DBHandler? = null
-
     // For recycler
     private lateinit var passwordRecyclerView: RecyclerView
     private lateinit var passwordAdapter: PasswordAdapter
@@ -62,6 +60,9 @@ class MainActivity : AppCompatActivity() {
         passwordRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
+
+
+    // Lockscreen
     private fun initPinDialog() {
         pinDialog = Dialog(this)
         pinDialog.setContentView(R.layout.lockscreen)
@@ -92,6 +93,9 @@ class MainActivity : AppCompatActivity() {
         }
         pinDialog.show()
     }
+
+
+
     // Handle Folder Button Click
     fun onFolderClick(view: View) {
         // Inflate the Folder_Creation_Layout
@@ -119,6 +123,9 @@ class MainActivity : AppCompatActivity() {
         }
         folderCreationDialog.show()
     }
+
+
+
     // Handle Password Button Click
     fun onPasswordClick(view: View) {
         // Inflate Password_Creation_Layout
@@ -221,7 +228,6 @@ class MainActivity : AppCompatActivity() {
         }
         editPasswordDialog.show()
     }
-
     fun onPasswordDeleteClick(position: Int) {
         val selectedPassword = passwordAdapter.getItemAtPosition(position)
         // show a confirmation dialog
