@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity() {
                 if (pinAttempts >= 3) {
                     Toast.makeText(this, "Three attempts reached.", Toast.LENGTH_SHORT).show()
                     pinAttempts = 0
-
                 }
             }
             dbHandler?.getPassword()
@@ -220,8 +219,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onPasswordDeleteClick(position: Int) {
-        // Handle the "Edit" button click for the item at the given position
-        // You can open an edit dialog or perform any other edit action here
+        val selectedPassword = passwordAdapter.getItemAtPosition(position)
+        // show a confirmation dialog
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Confirm Deletion")
+        alertDialogBuilder.setMessage("Are you sure you want to delete this password?")
+
+        alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+            // delete password from database
+            val rowsAffected = dbHandler?.deletePassword(selectedPassword)
+            // success
+            if (rowsAffected != null && rowsAffected > 0) {
+                Toast.makeText(this, "Password deleted", Toast.LENGTH_SHORT).show()
+                // update UI by removing password from list
+                val updatedPasswordList = dbHandler?.getPassword() ?: emptyList()
+                passwordAdapter.updateData(updatedPasswordList)
+            } else {
+                // fail
+                Toast.makeText(this, "Failed to delete password", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        alertDialogBuilder.create().show()
     }
 }
 

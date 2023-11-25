@@ -97,9 +97,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_
 
     fun deletePassword(pw: Password): Int {
         val db = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(COL_ID, pw.pwID)
-        val success = db.delete(TABLE_PASSWORDS, "id=" + pw.pwID, null)
+        val success = db.delete(TABLE_PASSWORDS, "$COL_ID=?", arrayOf(pw.pwID.toString()))
         db.close()
         return success
     }
