@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F0F15"
+    android:background="@drawable/background2"
     android:padding="30dp">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:text="Password Manager"
+        android:text=""
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#F2F4F3"
@@ -32,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#1C1C27"
+        android:background="@drawable/box"
+        android:elevation="4dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="15dp"
@@ -45,16 +46,16 @@
             android:layout_height="wrap_content"
             android:text="Folders"
             android:textAllCaps="true"
-            android:textColor="#F2F4F3"
+            android:textColor="#004AAD"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            android:typeface="normal" />
+            android:fontFamily="@font/font1"
+            android:layout_marginBottom="10dp" />
         <LinearLayout
             android:id="@+id/foldersRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1C1C27"
+            android:background="@drawable/box"
             android:gravity="center"
             android:orientation="horizontal">
             <androidx.cardview.widget.CardView
@@ -87,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#1C1C27"
+        android:background="@drawable/box"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="15dp"
@@ -100,9 +101,10 @@
             android:layout_height="wrap_content"
             android:text="Passwords"
             android:textAllCaps="true"
-            android:textColor="#F2F4F3"
+            android:textColor="#004AAD"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:fontFamily="@font/font1"
             android:layout_marginBottom="10dp"
             android:typeface="normal" />
         <androidx.recyclerview.widget.RecyclerView

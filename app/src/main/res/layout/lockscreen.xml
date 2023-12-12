@@ -1,27 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+
     android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="295dp"
+        android:layout_height="104dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo1" />
+
     <TextView
         android:id="@+id/instructionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/font1"
+        android:gravity="center|center_horizontal"
         android:text="Enter your PIN"
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp"/>
+        android:textColor="#0F428E"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/pinInput"
-        android:layout_width="match_parent"
+        android:layout_width="214dp"
         android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:maxLength="4"
         android:layout_below="@id/instructionText"
-        android:layout_marginBottom="16dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:drawableStart="@android:drawable/ic_lock_idle_lock"
+        android:drawableTint="#FFFFFF"
+        android:foregroundTint="#FFFFFF"
+        android:inputType="numberPassword"
+
+        android:maxLength="4"
+        android:shadowColor="#2E2727"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/confirmButton"
-        android:layout_width="match_parent"
+        android:layout_width="121dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/pinInput"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/custom_button1"
+        android:fontFamily="@font/font1"
         android:text="Confirm"
-        android:layout_below="@id/pinInput"/>
-</RelativeLayout>
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
